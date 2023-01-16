@@ -8,7 +8,6 @@ namespace DLS
         public ActiveVehicle(Vehicle vehicle, bool playerVehicle = false, LightStage lightStage = LightStage.Off, SirenStage sirenStage = SirenStage.Off)
         {
             Vehicle = vehicle;
-            VehicleHash = 0;
             LightStage = lightStage;
             SirenStage = sirenStage;
             CurrentHash = 0;
@@ -30,12 +29,34 @@ namespace DLS
             PlayerVehicle = playerVehicle;
             DefaultEL = vehicle.EmergencyLighting;
             IsSirenSilent = vehicle.IsSirenSilent;
-            IsScanOn = false;
+            //IsScanOn = false;
+
+            LPStatus = LPStatus.Off;
+            Delante = Delante.Off;
+            WhiteStatus = WhiteStatus.Off;
+            Detras = Detras.Off;
+            boot = boot.close;
+            whiteLaterales = whiteLaterales.off;
+            elAmbar = elAmbar.Off;
+            /* 
+             *  V1.4.1.1 EUROPEAN
+             *  */
+            LPStatus = LPStatus.Off;
+            Delante = Delante.Off;
+            WhiteStatus = WhiteStatus.Off;
+            Detras = Detras.Off;
+            boot = boot.close;
+            whiteLaterales = whiteLaterales.off;
+            elAmbar = elAmbar.Off;
+            /* 
+             *  V1.4.1.1 END
+             *  */
+
             if (vehicle && vehicle.GetDLS() != null)
             {
                 bool temp = vehicle.IsSirenOn;
                 vehicle.IsSirenOn = false;
-                InitialLengths = new float[20];
+                InitialLengths = new float[EmergencyLighting.MaxLights];
                 GameFiber.Yield();
                 for (int i = 0; i < InitialLengths.Length; i++)
                 {
@@ -61,12 +82,10 @@ namespace DLS
                     TAgroup = Entrypoint.tagroups[vehDLS.TrafficAdvisory.TAgroup];
                     TApatternCurrentIndex = Entrypoint.tagroups[vehDLS.TrafficAdvisory.TAgroup].GetIndexFromTAPatternName(vehDLS.TrafficAdvisory.DefaultTApattern);
                 }
-                VehicleHash = Game.GetHashKey(vehDLS.Name);
                 vehicle.EmergencyLightingOverride = Vehicles.GetEL(vehicle, this);
             }
         }
         public Vehicle Vehicle { get; set; }
-        public uint VehicleHash { get; set; }
         public LightStage LightStage { get; set; }
         public LightStage TempLightStage { get; set; }
         public bool TempUsed { get; set; } = true;
@@ -90,7 +109,23 @@ namespace DLS
         public float[] InitialLengths { get; set; }
         public EmergencyLighting DefaultEL { get; set; }
         public bool IsSirenSilent { get; set; }
-        public bool IsScanOn { get; set; }
+        /*public bool IsScanOn { get; set; }*/
+        /* 
+         *  V1.4.1.1 EUROPEAN
+         *  */
+        public LPStatus LPStatus { get; set; }
+        public Delante Delante { get; set; }
+        public Detras Detras { get; set; }
+        public WhiteStatus WhiteStatus { get; set; }
+        public laterales laterales { get; set; }
+        public whiteLaterales whiteLaterales { get; set; }
+        public boot boot { get; set; }
+        public elAmbar elAmbar { get; set; }
+
+        /* 
+         *  V1.4.1.1 END
+         *  */
+
     }
 
     public enum LightStage
@@ -101,6 +136,7 @@ namespace DLS
         Three,
         CustomOne,
         CustomTwo,
+        CustomThree,
         Empty
     }
 
@@ -137,4 +173,63 @@ namespace DLS
         Off,
         None
     }
+    /* 
+     *  V1.4.1.1 EUROPEAN
+     *  */
+    public enum LPStatus
+    {
+        Off,
+        On
+    }
+
+    public enum Delante
+    {
+        Off,
+        On
+    }
+
+    public enum Detras
+    {
+        Off,
+        On
+    }
+
+    public enum WhiteStatus
+    {
+        Off,
+        On,
+        Static
+    }
+
+    public enum laterales
+    {
+        Off,
+        derecha,
+        izquierda,
+        ambos
+    }
+
+    public enum whiteLaterales
+    {
+        off,
+        der,
+        izq,
+        both
+    }
+
+    public enum boot
+    {
+        open,
+        close
+    }
+
+    public enum elAmbar
+    {
+        On,
+        Off
+    }
+    /* 
+     *  V1.4.1.1 END
+     *  */
+
 }

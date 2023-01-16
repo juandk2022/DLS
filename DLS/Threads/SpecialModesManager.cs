@@ -90,12 +90,27 @@ namespace DLS.Threads
                                                 Lights.Update(activeVeh);
                                             }
                                             break;
+
+                                        /* 
+                                         *  V1.4.1.1 EUROPEAN
+                                         *  */
+                                        case "custom3":
+                                            if (activeVeh.LightStage != LightStage.CustomThree)
+                                            {
+                                                activeVeh.LightStage = LightStage.CustomThree;
+                                                Lights.Update(activeVeh);
+                                            }
+                                            break;
+                                            /* 
+                                             *  V1.4.1.1 END
+                                             *  */
+
                                     }
                                 }
 
                                 if (dlsModel.DoesVehicleHaveLightStage(LightStage.Three)
                                     && veh.HasDriver
-                                    && veh.EmergencyLighting.Name != dlsModel.Name + " | " + activeVeh.LightStage.ToString() + " | " + activeVeh.TAStage.ToString() + " | " + activeVeh.SBOn.ToString())
+                                    && veh.EmergencyLighting.Name != veh.Model.Name + " | " + activeVeh.LightStage.ToString() + " | " + activeVeh.TAStage.ToString() + " | " + activeVeh.SBOn.ToString())
                                 {
                                     activeVeh.LightStage = LightStage.Three;
                                     Lights.Update(activeVeh);

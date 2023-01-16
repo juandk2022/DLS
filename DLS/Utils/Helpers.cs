@@ -12,7 +12,7 @@ namespace DLS.Utils
         public static Vehicle currentVehicle { get; set; }
         public static bool IsPlayerDriver { get; set; } = false;
         public static bool IsVehicleValid { get; set; } = false;
-        public static SirenStatus[] IsSirenOn { get; set; } = new SirenStatus[20];
+        public static SirenStatus[] IsSirenOn { get; set; } = new SirenStatus[EmergencyLighting.MaxLights];
 
         private static void Process()
         {
@@ -39,7 +39,7 @@ namespace DLS.Utils
                     activeVeh = currentVehicle.GetActiveVehicle();
                     if (IsPlayerDriver && activeVeh != null && dlsModel != null && currentVehicle.HasSiren)
                     {
-                        for (int i = 1; i <= 20; i++)
+                        for (int i = 1; i <= EmergencyLighting.MaxLights; i++)
                         {
                             IsSirenOn[i - 1] = Lights.GetSirenStatus(activeVeh, i);
                         }

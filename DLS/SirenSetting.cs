@@ -90,15 +90,8 @@ namespace DLS
 
         public void AddSiren(SirenEntry item)
         {
-            if (sirenList.Count < 20)
-            {
-                item.SirenIdCommentText = "Siren " + (sirenList.Count + 1);
-                sirenList.Add(item);
-            }
-            else
-            {
-                throw new IndexOutOfRangeException("A SirenSetting cannot contain more than 20 sirens");
-            }
+            item.SirenIdCommentText = "Siren " + (sirenList.Count + 1);
+            sirenList.Add(item);
         }
     }
 

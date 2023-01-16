@@ -26,6 +26,21 @@ namespace DLS
 
         [XmlElement("Six")]
         public TApatternNumber Six = new TApatternNumber();
+        /* 
+         *  V1.4.1.1 EUROPEAN
+         *  */
+        [XmlElement("seven")]
+        public TApatternNumber seven = new TApatternNumber();
+
+        [XmlElement("eight")]
+        public TApatternNumber eight = new TApatternNumber();
+
+        [XmlElement("nine")]
+        public TApatternNumber nine = new TApatternNumber();
+        /* 
+         *  V1.4.1.1 END
+         *  */
+
     }
 
     public class TApatternNumber
@@ -45,6 +60,13 @@ namespace DLS
 
     public class DirectionTAPattern
     {
+        /* 
+         *  V1.4.1.1 EUROPEAN
+         *  */
+
+        [XmlElement("LL")]
+        public string LL = "00000000000000000000000000000000";
+
         [XmlElement("L")]
         public string L = "00000000000000000000000000000000";
 
@@ -53,6 +75,9 @@ namespace DLS
 
         [XmlElement("CL")]
         public string CL = "00000000000000000000000000000000";
+
+        [XmlElement("CC")]
+        public string CC = "00000000000000000000000000000000";
 
         [XmlElement("C")]
         public string C = "00000000000000000000000000000000";
@@ -65,5 +90,12 @@ namespace DLS
 
         [XmlElement("R")]
         public string R = "00000000000000000000000000000000";
+
+        [XmlElement("RR")]
+        public string RR = "00000000000000000000000000000000";
+        /* 
+         *  V1.4.1.1 END
+         *  */
+
     }
 }
